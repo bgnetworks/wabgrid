@@ -1,0 +1,16 @@
+#!/usr/bin/make -f
+
+%:
+	dh $@ --with python-virtualenv
+
+override_dh_shlibs:
+	dh_shlibs -l/opt
+
+override_dh_virtualenv:
+	dh_virtualenv \
+		--python /usr/bin/python3 \
+		--builtin-venv \
+		--upgrade-pip \
+		--extras deb \
+		--extra-pip-arg='--no-binary' \
+		--extra-pip-arg='cffi,numpy'
